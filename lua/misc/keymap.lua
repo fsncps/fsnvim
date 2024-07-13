@@ -13,16 +13,16 @@ vim.keymap.set("n", "<leader>E", ":Neotree<CR>")
 ---
 ---
 vim.keymap.set(
-   "n",
-   "<PageDown>",
-   ':lua if not Is_Neo_Tree() then vim.cmd("bnext") else vim.cmd("wincmd l | bnext") end<CR>',
-   { desc = "Next Buffer-Tab" }
+	"n",
+	"<A-Right>",
+	':lua if not Is_Neo_Tree() then vim.cmd("BufferNext") else vim.cmd("wincmd l | BufferNext") end<CR>',
+	{ desc = "Next Buffer-Tab" }
 )
 vim.keymap.set(
-   "n",
-   "<PageUp>",
-   ':lua if not Is_Neo_Tree() then vim.cmd("bprevious") else vim.cmd("wincmd l | bprevious") end<CR>',
-   { desc = "Previous Buffer-Tab" }
+	"n",
+	"<A-Left>",
+	':lua if not Is_Neo_Tree() then vim.cmd("BufferPrevious") else vim.cmd("wincmd l | BufferPrevious") end<CR>',
+	{ desc = "Previous Buffer-Tab" }
 )
 
 -- Key mappings for tab navigation
