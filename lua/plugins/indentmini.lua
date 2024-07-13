@@ -1,1 +1,0 @@
-return { "nvimdev/indentmini.nvim" }
