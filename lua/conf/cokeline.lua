@@ -8,8 +8,9 @@ require('cokeline').setup({
       filetype = 'neo-tree',
       components = {
          {
-            text = require("fnct.last_commit").Last_Commit(vim.api.nvim_buf_get_name(0)),
-            fg = '#ffffff',
+            text = vim.g.GIT_STATUS,
+            --text = require("fnct.last_commit").Last_Commit(vim.api.nvim_buf_get_name(0)),
+            fg = '#1e2030',
             bg = '#1e2030',
          },
       },
