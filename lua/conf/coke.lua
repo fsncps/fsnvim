@@ -1,0 +1,18 @@
+-- require('cokeline').setup({
+--    components = {
+--       { text = function(buffer) return ' ' .. buffer.index .. ': ' end },
+--       {
+--          text = function(buffer) return buffer.devicon .. buffer.filename end,
+--          fg = function(buffer) return buffer.is_focused and '#ffffff' or '#888888' end,
+--          bg = function(buffer) return buffer.is_focused and '#0033ff' or nil end,
+--       },
+--       { text = function(buffer) return buffer.is_modified and ' [+]' or '' end },
+--       { text = 'X',                                                            click = function(buffer) vim.api
+--              .nvim_buf_delete(buffer.bufnr, {}) end },
+--    },
+--    filters = {
+--       function(buffer)
+--          return vim.api.nvim_buf_get_option(buffer.bufnr, 'buftype') ~= 'terminal'
+--       end,
+--    },
+-- })

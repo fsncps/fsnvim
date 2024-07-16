@@ -20,6 +20,13 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.api.nvim_create_autocmd({ "VimEnter", "TabEnter" }, {
    callback = function()
       vim.cmd("Neotree")
+      vim.g.last_git_commit_message = "Commits N/A"
+   end,
+})
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+   callback = function()
+      require("fnct.popup-term").Init_Popup_Term()
    end,
 })
 
@@ -28,5 +35,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
    callback = function()
       vim.highlight.on_yank()
+   end,
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+   pattern = "*",
+   callback = function()
+      if vim.bo.filetype == "help" then
+         vim.cmd("wincmd L")
+      end
+   end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+   pattern = "*",
+   callback = function()
+      local filepath = vim.api.nvim_buf_get_name(0)
+      if vim.fn.isdirectory(filepath) == 0 then -- Ensure it's not a directory
+         vim.g.last_git_commit_message = require("fnct.last_commit").Last_Commit(filepath)
+      else
+         vim.g.last_git_commit_message = "No commits"
+      end
    end,
 })

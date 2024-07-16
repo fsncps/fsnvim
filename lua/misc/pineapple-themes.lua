@@ -1,5 +1,9 @@
 return {
     "catppuccin/nvim",
     "morhetz/gruvbox",
-    "folke/tokyonight.nvim",
+    "sainnhe/everforest",
+    "nanotech/jellybeans.vim",
+    "sjl/badwolf",
+    "sainnhe/gruvbox-material",
+    "tomasr/molokai",
 }

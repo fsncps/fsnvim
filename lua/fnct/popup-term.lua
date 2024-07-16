@@ -1,7 +1,7 @@
-local Popup = require("nui.popup")
+TermPopup = require("nui.popup")
 
-local termPopup              -- Keeps popup instance local to the module
-local isPopupVisible = false -- Tracks visibility state of the popup
+PopupTerm = {}
+IsTermPopupVisible = false
 
 local function init_popup_term()
    local popup_width = 90
@@ -9,7 +9,7 @@ local function init_popup_term()
    local total_cols = vim.o.columns
    local total_lines = vim.o.lines
 
-   termPopup = Popup({
+   PopupTerm = TermPopup({
       enter = true,
       focusable = true,
       border = {
@@ -26,21 +26,19 @@ local function init_popup_term()
       },
    })
 
-   termPopup:mount()
+   PopupTerm:mount()
    vim.api.nvim_command('terminal')
-   vim.cmd('startinsert')
-   termPopup:hide()
+   PopupTerm:hide()
 end
 
 local function toggle_terminal()
-   if not termPopup then
-      init_popup_term() -- Initialize if not already done
-   elseif isPopupVisible then
-      termPopup:hide()
-      isPopupVisible = false
+   if not IsTermPopupVisible == true then
+      PopupTerm:show()
+      IsTermPopupVisible = true
+      vim.cmd("startinsert")
    else
-      termPopup:show()
-      isPopupVisible = true
+      PopupTerm:hide()
+      IsTermPopupVisible = false
    end
 end
 
