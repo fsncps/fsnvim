@@ -20,4 +20,18 @@ function Is_Neo_Tree()
    return bufname:match("neo%-tree filesystem") ~= nil
 end
 
+local function get_directory(buffer)
+   local path = buffer.path
+   local dir = vim.fn.fnamemodify(path, ":h:t")
+   return dir
+end
+
+local function get_buffer_name(buffer)
+   local dir = get_directory(buffer)
+   local filename = buffer.filename
+   return dir .. "/" .. filename
+end
+
 Require_All("fnct")
+
+return { GET_DIR = get_directory }

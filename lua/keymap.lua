@@ -17,7 +17,7 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>E", ":Neotree<CR>")
 
 -- open file_browser with the path of the current buffer
----vim.keymap.set("n", "<space>B", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+vim.keymap.set("n", "<space>B", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
 ---
 ---
 -- Key mappings for buffer picking and navigation
@@ -38,12 +38,3 @@ vim.keymap.set("n", "<Leader>B", ":lua ToggleTrueFalse()<CR>", { desc = "Toggle 
 
 vim.keymap.set("n", "<C-s>", ":w <CR>", { desc = "Write to file" })
 vim.keymap.set("n", "<C-q>", ":Bdelete <CR>", { desc = "Close Buffer-Tab" })
-
--- local funcs = require('fnct')
--- vim.keymap.set("n", "<leader>t", function() funcs.Toggle_Floating_Terminal() end, { desc = "Toggle Floating Terminal" })
--- vim.keymap.set("n", "<leader>t", ":lua Toggle_Floating_Terminal()<CR>", { desc = "Toggle Floating Terminal" })
-
---vim.keymap.set('n', '<C-t>', ':lua Open_Terminal_in_Float()<CR>', { desc = "Close Buffer-Tab" })
--- vim.keymap.set('i', '<C-t>', '<Esc>:lua Open_Terminal_in_Float()<CR>', { desc = "Close Buffer-Tab" })
--- vim.keymap.set('v', '<C-t>', '<Esc>:lua Open_Terminal_in_Float()<CR>', { desc = "Close Buffer-Tab" })
---im.keymap.set("n", "<leader>t", ":lua Open_Terminal_in_Float()<CR>", { desc = "Floating Terminal" })

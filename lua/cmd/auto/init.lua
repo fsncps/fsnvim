@@ -20,12 +20,22 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.api.nvim_create_autocmd({ "VimEnter", "TabEnter" }, {
    callback = function()
       vim.cmd("Neotree")
+      vim.cmd("Neotree toggle")
+      vim.cmd("Neotree toggle")
    end,
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
    callback = function()
       require("fnct.popup-term").Init_Popup_Term()
+      -- Check if NeoTree is open and has a window ID
+      local neotree_win = vim.fn.bufwinid('Neotree')
+      if neotree_win ~= -1 then
+         -- Focus the NeoTree window
+         vim.api.nvim_set_current_win(neotree_win)
+         -- Unfocus by moving to the previous window
+         vim.cmd("wincmd p")
+      end
    end,
 })
 
@@ -45,7 +55,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
       end
    end,
 })
-
 
 
 vim.g.GIT_COMMIT_HASH = "No data"

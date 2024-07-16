@@ -1,7 +1,6 @@
-TermPopup = require("nui.popup")
-
-PopupTerm = {}
-IsTermPopupVisible = false
+local TermPopup = require("nui.popup")
+local PopupTerm = {}
+local IsTermPopupVisible = false
 
 local function init_popup_term()
    local popup_width = 90
@@ -14,25 +13,53 @@ local function init_popup_term()
       focusable = true,
       border = {
          style = "rounded",
-         highlight = "FloatBorder",
+         highlight = "Normal",
+         text = {
+            top = " #!/bin/bash",
+            top_align = "center",
+            bottom = " Press 'q' to close ",
+            bottom_align = "right",
+         },
       },
       position = {
          row = total_lines - popup_height - 5,
-         col = total_cols - popup_width + 5,
+         col = total_cols - popup_width,
       },
       size = {
          width = popup_width,
          height = popup_height,
       },
+      win_options = {
+         winblend = 10, -- Transparency
+         winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+      },
    })
 
+   -- Mount the pop-up and open a terminal
    PopupTerm:mount()
    vim.api.nvim_command('terminal')
    PopupTerm:hide()
+
+   -- Set autocommands to handle pop-up events
+   vim.api.nvim_create_autocmd("TermClose", {
+      buffer = PopupTerm.bufnr,
+      callback = function()
+         PopupTerm:unmount()
+      end,
+   })
+
+   vim.api.nvim_buf_set_keymap(PopupTerm.bufnr, "n", "q", "", {
+      noremap = true,
+      silent = true,
+      callback = function()
+         PopupTerm:hide()
+         IsTermPopupVisible = false
+      end,
+   })
 end
 
 local function toggle_terminal()
-   if not IsTermPopupVisible == true then
+   if not IsTermPopupVisible then
       PopupTerm:show()
       IsTermPopupVisible = true
       vim.cmd("startinsert")

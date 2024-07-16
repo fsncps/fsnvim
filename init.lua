@@ -7,12 +7,12 @@
 -- $$ |      $$\   $$ |$$ |\$$$ |  \$$$  /    $$ |  $$ |\$  /$$ |
 -- $$ |      \$$$$$$  |$$ | \$$ |   \$  /   $$$$$$\ $$ | \_/ $$ |
 -- \__|       \______/ \__|  \__|    \_/    \______|\__|     \__|
---
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
+-- require("lazy")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-require("misc.opts")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -20,13 +20,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
-
---require("conf")
---require("misc.keymap")
+require("opts")
 require("fnct")
 require("cmd")
 require("cmd.auto")
 require("conf")
-require("misc.keymap")
-
-vim.cmd("colorscheme catppuccin-macchiato")
+require("keymap")

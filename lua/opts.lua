@@ -1,6 +1,5 @@
 --VIM OPTS
 --
-
 vim.g.have_nerd_font = true
 vim.opt.swapfile = false
 vim.opt.number = true
