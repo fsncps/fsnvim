@@ -14,7 +14,6 @@ local function init_popup_term()
       focusable = true,
       border = {
          style = "rounded",
-         highlight = "MyPopupTextTop",
          text = {
             top = { " #!/bin/bash ", highlight = "MyPopupTextTop" },
             top_align = "center",
