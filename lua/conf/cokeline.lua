@@ -30,7 +30,7 @@ require('cokeline').setup({
    },
    components = {
       {
-         text = ' ',
+         text = '|',
          bg = '#24273a',
       },
       {
@@ -45,7 +45,7 @@ require('cokeline').setup({
          style = function(buffer) return buffer.is_focused and 'bold' or nil end,
       },
       {
-         text = ' ',
+         text = '|',
          bg = '#24273a',
       },
    },

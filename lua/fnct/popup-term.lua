@@ -1,10 +1,11 @@
 local TermPopup = require("nui.popup")
 local PopupTerm = {}
 local IsTermPopupVisible = false
+vim.cmd([[highlight MyPopupBg guibg=#282c34]])
 
 local function init_popup_term()
-   local popup_width = 90
-   local popup_height = 20
+   local popup_width = 100
+   local popup_height = 23
    local total_cols = vim.o.columns
    local total_lines = vim.o.lines
 
@@ -13,11 +14,11 @@ local function init_popup_term()
       focusable = true,
       border = {
          style = "rounded",
-         highlight = "Normal",
+         highlight = "MyPopupTextTop",
          text = {
-            top = " #!/bin/bash",
+            top = { " #!/bin/bash ", highlight = "MyPopupTextTop" },
             top_align = "center",
-            bottom = " Press 'q' to close ",
+            bottom = { " 'q' to close " }, --hightlight = "MyPopupTextBottom" },
             bottom_align = "right",
          },
       },
@@ -34,7 +35,13 @@ local function init_popup_term()
          winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
       },
    })
+   PopupTerm:on("BufEnter", function()
+      vim.api.nvim_buf_add_highlight(PopupTerm.bufnr, -1, "MyPopupTextTop", 0, 0, -1)
+      vim.api.nvim_buf_add_highlight(PopupTerm.bufnr, -1, "MyPopupTextBottom", -1, 0, -1)
+   end)
 
+   -- Mount the popup
+   PopupTerm:mount()
    -- Mount the pop-up and open a terminal
    PopupTerm:mount()
    vim.api.nvim_command('terminal')
