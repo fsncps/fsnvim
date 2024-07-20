@@ -17,7 +17,7 @@ local function init_popup_term()
          text = {
             top = { " #!/bin/bash ", highlight = "MyPopupTextTop" },
             top_align = "center",
-            bottom = { " 'q' to close " }, --hightlight = "MyPopupTextBottom" },
+            bottom = { " 'q' to close ", hightlight = "MyPopupTextBottom" },
             bottom_align = "right",
          },
       },
