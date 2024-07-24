@@ -38,3 +38,6 @@ vim.keymap.set("n", "<Leader>B", ":lua ToggleTrueFalse()<CR>", { desc = "Toggle 
 
 vim.keymap.set("n", "<C-s>", ":w <CR>", { desc = "Write to file" })
 vim.keymap.set("n", "<C-q>", ":Bdelete <CR>", { desc = "Close Buffer-Tab" })
+
+vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
+vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
