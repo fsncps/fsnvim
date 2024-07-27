@@ -37,6 +37,8 @@ vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Move focus to the u
 vim.keymap.set("n", "<Leader>B", ":lua ToggleTrueFalse()<CR>", { desc = "Toggle Boolean" })
 
 vim.keymap.set("n", "<C-s>", ":w <CR>", { desc = "Write to file" })
+vim.keymap.set("i", "<C-s>", "<Esc>:w <CR>", { desc = "Write to file" })
+
 vim.keymap.set("n", "<C-q>", ":Bdelete <CR>", { desc = "Close Buffer-Tab" })
 
 vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
