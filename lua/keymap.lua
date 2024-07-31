@@ -29,7 +29,35 @@ vim.keymap.set('n', '<A-Left>', '<Plug>(cokeline-focus-prev)', { silent = true, 
 -- Key mappings for switching buffers
 vim.keymap.set('n', '<S-A-Right>', '<Plug>(cokeline-switch-next)', { silent = true, desc = "Switch to next buffer" })
 vim.keymap.set('n', '<S-A-Left>', '<Plug>(cokeline-switch-prev)', { silent = true, desc = "Switch to previous buffer" })
+--mappings for switching buffers
+--
+local function custom_up()
+   local line_count = vim.api.nvim_buf_line_count(0)
+   local current_line = vim.fn.line('.')
+   if current_line <= 23 then
+      vim.api.nvim_win_set_cursor(0, { 1, 0 })
+   else
+      vim.cmd('normal! 23k')
+   end
+end
 
+local function custom_down()
+   local line_count = vim.api.nvim_buf_line_count(0)
+   local current_line = vim.fn.line('.')
+   if (line_count - current_line) < 23 then
+      vim.api.nvim_win_set_cursor(0, { line_count, 0 })
+   else
+      vim.cmd('normal! 23j')
+   end
+end
+
+vim.keymap.set('n', '<S-Up>', custom_up, { silent = true, desc = "Move up or jump to top if less than 23 lines to top" })
+vim.keymap.set('n', '<S-Down>', custom_down,
+   { silent = true, desc = "Move down or jump to bottom if less than 23 lines to bottom" })
+
+
+vim.keymap.set('n', '<S-A-Right>', '<Plug>(cokeline-switch-next)', { silent = true, desc = "Switch to next buffer" })
+vim.keymap.set('n', '<S-A-Left>', '<Plug>(cokeline-switch-prev)', { silent = true, desc = "Switch to previous buffer" })
 -- Key mappings for tab navigation
 vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Move focus to the upper window" })
