@@ -6,10 +6,11 @@ A Vim starting point for writers and other non-developer tech enthusiasts.
 
 WORK IN PROGRESS! *unfinished and subject to change*
 
-The goal is smooth navigation of projects and a focus on writing and idea generation with sexy UX (due to soely the beauty of Neovim and Lua, by no means this project) to provide 
+The goal is smooth navigation of projects and a focus on writing and idea generation with sexy UX (due to soely the beauty of Neovim and Lua, by no means this project), ultimately with integration of news and research API controlled by OpenAI and Ollama LLMs, to provide 
 
 - **Lean and modular design**
-- **For more fun with your workflow**
+- **More fun with your workflow**
+- **Symbiotic idea generation and creation of content**
 
 **NOT** a Neovim distribution, but instead a starting point for your configuration.
 
