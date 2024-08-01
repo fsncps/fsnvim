@@ -2,9 +2,12 @@
 
 ## Introduction
 
-A starting point for Neovim for writers and other non-developer tech enthusiasts.
+A Vim starting point for writers and other non-developer tech enthusiasts.
 
 WORK IN PROGRESS! *unfinished and subject to change*
+
+The goal is smooth navigation of projects and a focus on writing and idea generation with sexy UX (due to soely the beauty of Neovim and Lua, by no means this project.)
+
 
 - **Small**
 - **Modular**
