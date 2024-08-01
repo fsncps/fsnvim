@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A Vim starting point for writers and other non-developer tech enthusiasts.
+        A Vim starting point for writers and other non-developer tech enthusiasts.
 
 WORK IN PROGRESS! *unfinished and subject to change*
 
