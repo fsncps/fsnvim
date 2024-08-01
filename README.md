@@ -1,4 +1,4 @@
-# FSNVIM
+# fsnvim
 
 ## Introduction
 
