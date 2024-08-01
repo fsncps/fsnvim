@@ -66,6 +66,7 @@ Neovim's configurations are located under the following paths, depending on your
 
 ```bash
 git clone https://github.com/fsncps/fsnvim "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
 
 ##### Windows
 
@@ -75,6 +76,7 @@ cmd
 
 ```bash
 git clone https://github.com/fsncps/fsnvim %localappdata%\nvim\
+```
 
 If you're using powershell.exe:
 
@@ -82,4 +84,4 @@ powershell
 
 ```bash
 git clone https://github.com/fsncps/fsnvim $env:LOCALAPPDATA\nvim\
-
+```
