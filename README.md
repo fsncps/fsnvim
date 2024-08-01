@@ -3,7 +3,8 @@
 ## Introduction
 
 A starting point for Neovim for writers and other non-developer tech enthusiasts.
-WORK IN PROGRESS!
+
+WORK IN PROGRESS! *unfinished and subject to change*
 
 - **Small**
 - **Modular**
