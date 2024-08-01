@@ -1,3 +1,12 @@
-**/logs
+# Ignore all log files
 *.log
 
+# Ignore the directory "temp"
+temp/
+
+# Ignore all files in the "build" directory except "build/include.me"
+build/*
+!build/include.me
+
+# Ignore the config file
+config.yaml
