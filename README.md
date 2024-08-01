@@ -2,7 +2,8 @@
 
 ## Introduction
 
-A starting point for Neovim for writers and other non-developer tech enthusiasts:
+A starting point for Neovim for writers and other non-developer tech enthusiasts.
+WORK IN PROGRESS!
 
 - **Small**
 - **Modular**
@@ -61,15 +62,11 @@ Neovim's configurations are located under the following paths, depending on your
 > **NOTE**  
 > If following the recommended step above (i.e., forking the repo), replace `fsncps` with `<your_github_username>` in the commands below.
 
-<details>
-<summary>Linux and macOS</summary>
+##### Linux and macOS
 
-```sh
 git clone https://github.com/fsncps/fsnvim "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
-</details>
-<details>
-<summary>Windows</summary>
+##### Windows
 
 If you're using cmd.exe:
 
@@ -83,4 +80,3 @@ powershell
 
 git clone https://github.com/fsncps/fsnvim $env:LOCALAPPDATA\nvim\
 
-</details>
