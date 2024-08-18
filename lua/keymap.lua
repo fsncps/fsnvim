@@ -71,3 +71,9 @@ vim.keymap.set("n", "<C-q>", ":Bdelete <CR>", { desc = "Close Buffer-Tab" })
 
 vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
 vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
+
+
+---prodect-cd
+---
+vim.keymap.set("n", "<Leader>pp", ":CdProject<CR>", { desc = "Select Project" })
+vim.keymap.set("n", "<Leader>pa", ":CdProjectManualAdd<CR>", { desc = "Add Project" })
