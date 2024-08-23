@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       vim.opt_local.breakindent = false
       --vim.opt_local.textwidth = 200
       --vim.opt_local.wrapmargin = 50
-      vim.opt_local.columns = 150
+      vim.opt_local.columns = 130
       -- vim.api.nvim_buf_set_keymap(0, "n", "<Up>", "gk", { noremap = true })
       -- vim.api.nvim_buf_set_keymap(0, "n", "<Up>", "gk", { noremap = true })
       vim.api.nvim_buf_set_keymap(0, "n", "<Up>", "gk", { desc = "Up" })
