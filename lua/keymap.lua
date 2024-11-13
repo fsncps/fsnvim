@@ -1,19 +1,21 @@
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set("t", "<C-t>", "<C-\\><C-n><C-t>", { desc = "Move focus to the left window" })
-vim.keymap.set("t", "<C-Left>", "<C-\\><C-n><C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("t", "<C-Right>", "<C-\\><C-n><C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("t", "<C-Down>", "<C-\\><C-n><C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("t", "<C-Up>", "<C-\\><C-n><C-w><C-k>", { desc = "Move focus to the upper window" })
+-- vim.keymap.set("t", "<C-Left>", "<C-\\><C-n><C-w><C-h>", { desc = "Move focus to the left window" })
+-- vim.keymap.set("t", "<C-Right>", "<C-\\><C-n><C-w><C-l>", { desc = "Move focus to the right window" })
+-- vim.keymap.set("t", "<C-Down>", "<C-\\><C-n><C-w><C-j>", { desc = "Move focus to the lower window" })
+-- vim.keymap.set("t", "<C-Up>", "<C-\\><C-n><C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<C-Left>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-Right>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-Down>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-Up>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 -- Both visual and normal mode for each, so you can open with a visual selection or without.
 --vim.keymap.set('n', '<C-t>', 'require('fnct.popup-term').Toggle_Terminal()')
-vim.keymap.set('n', '<C-t>', function()
+vim.keymap.set({ 'n', 'v' }, '<C-t>', function()
    require("fnct.popup-term").Toggle_Terminal()
 end, { noremap = true, silent = true })
+
+
+
 vim.keymap.set("n", "<leader>E", ":Neotree<CR>")
 
 -- open file_browser with the path of the current buffer
@@ -26,28 +28,29 @@ vim.keymap.set('n', '<leader>bc', '<Plug>(cokeline-pick-close)', { silent = true
 vim.keymap.set('n', '<A-Right>', '<Plug>(cokeline-focus-next)', { silent = true, desc = "Focus next buffer" })
 vim.keymap.set('n', '<A-Left>', '<Plug>(cokeline-focus-prev)', { silent = true, desc = "Focus previous buffer" })
 
--- Key mappings for switching buffers
-vim.keymap.set('n', '<S-A-Right>', '<Plug>(cokeline-switch-next)', { silent = true, desc = "Switch to next buffer" })
-vim.keymap.set('n', '<S-A-Left>', '<Plug>(cokeline-switch-prev)', { silent = true, desc = "Switch to previous buffer" })
+-- Key mappings for moving buffers
+vim.keymap.set('n', '<S-A-Right>', '<Plug>(cokeline-switch-next)', { silent = true, desc = "Move buffer to right" })
+vim.keymap.set('n', '<S-A-Left>', '<Plug>(cokeline-switch-prev)', { silent = true, desc = "Move boffer to left" })
+vim.keymap.set("n", "<A-q>", ":Bdelete <CR>", { desc = "Close Buffer" })
 --mappings for switching buffers
 --
 local function custom_up()
    local line_count = vim.api.nvim_buf_line_count(0)
    local current_line = vim.fn.line('.')
-   if current_line <= 23 then
+   if current_line <= 13 then
       vim.api.nvim_win_set_cursor(0, { 1, 0 })
    else
-      vim.cmd('normal! 23k')
+      vim.cmd('normal! 13k')
    end
 end
 
 local function custom_down()
    local line_count = vim.api.nvim_buf_line_count(0)
    local current_line = vim.fn.line('.')
-   if (line_count - current_line) < 23 then
+   if (line_count - current_line) < 13 then
       vim.api.nvim_win_set_cursor(0, { line_count, 0 })
    else
-      vim.cmd('normal! 23j')
+      vim.cmd('normal! 13j')
    end
 end
 
@@ -56,9 +59,6 @@ vim.keymap.set('n', '<S-Down>', custom_down,
    { silent = true, desc = "Move down or jump to bottom if less than 23 lines to bottom" })
 
 
-vim.keymap.set('n', '<S-A-Right>', '<Plug>(cokeline-switch-next)', { silent = true, desc = "Switch to next buffer" })
-vim.keymap.set('n', '<S-A-Left>', '<Plug>(cokeline-switch-prev)', { silent = true, desc = "Switch to previous buffer" })
--- Key mappings for tab navigation
 vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Move focus to the upper window" })
 
@@ -67,7 +67,6 @@ vim.keymap.set("n", "<Leader>B", ":lua ToggleTrueFalse()<CR>", { desc = "Toggle 
 vim.keymap.set("n", "<C-s>", ":w <CR>", { desc = "Write to file" })
 vim.keymap.set("i", "<C-s>", "<Esc>:w <CR>", { desc = "Write to file" })
 
-vim.keymap.set("n", "<C-q>", ":Bdelete <CR>", { desc = "Close Buffer-Tab" })
 
 vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
 vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
