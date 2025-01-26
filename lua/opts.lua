@@ -21,3 +21,6 @@ vim.opt.termguicolors = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.swapfile = false
+
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff0000", bg = "NONE" }) -- Red separator
+vim.o.fillchars = "vert:│,horiz:─"

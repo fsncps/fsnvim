@@ -15,6 +15,17 @@ vim.keymap.set({ 'n', 'v' }, '<C-t>', function()
 end, { noremap = true, silent = true })
 
 
+vim.keymap.set("n", "<C-S-Left>", "<C-w><C-<>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<C-S-Right>", "<C-w><C->>", { desc = "Increase window width" })
+vim.keymap.set("n", "<C-S-Down>", "<C-w><C-->", { desc = "Decrease window height" })
+vim.keymap.set("n", "<C-S-Up>", "<C-w><C-+>", { desc = "Increase window height" })
+
+
+vim.keymap.set("n", "<C-S-_>", "<C-w><C-v>", { desc = "Spilt vertically" })
+vim.keymap.set("n", "<C-S-->", "<C-w><C-s>", { desc = "Spilt horizontally" })
+-- Map Meta (Alt)
+-- vim.keymap.set('n', '<M-x>', ':echo "Metax pressed!"<CR>', { noremap = true, silent = true })
+-- Map Hyper
 
 vim.keymap.set("n", "<leader>E", ":Neotree<CR>")
 
@@ -33,6 +44,7 @@ vim.keymap.set('n', '<S-A-Right>', '<Plug>(cokeline-switch-next)', { silent = tr
 vim.keymap.set('n', '<S-A-Left>', '<Plug>(cokeline-switch-prev)', { silent = true, desc = "Move boffer to left" })
 vim.keymap.set("n", "<A-q>", ":Bdelete <CR>", { desc = "Close Buffer" })
 --mappings for switching buffers
+--
 --
 local function custom_up()
    local line_count = vim.api.nvim_buf_line_count(0)
@@ -68,11 +80,13 @@ vim.keymap.set("n", "<C-s>", ":w <CR>", { desc = "Write to file" })
 vim.keymap.set("i", "<C-s>", "<Esc>:w <CR>", { desc = "Write to file" })
 
 
-vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
-vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
+vim.keymap.set('n', '<D-c>', '"+y', { desc = 'Yank to "+"' })
+vim.keymap.set('v', '<D-c>', '"+y', { desc = 'Yank to "+"' })
 
 
 ---prodect-cd
 ---
 vim.keymap.set("n", "<Leader>pp", ":CdProject<CR>", { desc = "Select Project" })
 vim.keymap.set("n", "<Leader>pa", ":CdProjectManualAdd<CR>", { desc = "Add Project" })
+
+vim.keymap.set("n", "<C-§>", "<C-§><C-N>", { desc = "Normal Mode from anywhere" })
