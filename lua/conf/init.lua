@@ -12,7 +12,7 @@ Require_All("conf")
 -- vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#5e0102", bg = "NONE" }) -- Red separator
 -- vim.o.fillchars = "vert:│,horiz:─"
 
-require("fnct.popup-term").Init_Popup_Term()
+-- require("fnct.popup-term").Init_Popup_Term()
 
 -- require("colorful-winsep").setup({
 --    -- highlight for Window separator

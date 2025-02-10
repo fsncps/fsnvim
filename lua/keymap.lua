@@ -90,3 +90,36 @@ vim.keymap.set("n", "<Leader>pp", ":CdProject<CR>", { desc = "Select Project" })
 vim.keymap.set("n", "<Leader>pa", ":CdProjectManualAdd<CR>", { desc = "Add Project" })
 
 vim.keymap.set("n", "<C-§>", "<C-§><C-N>", { desc = "Normal Mode from anywhere" })
+
+-- Remove conflicting default mappings from Comment.nvim
+require('Comment').setup {
+   mappings = {
+      basic = false,   -- Disables `gc` and `gb`
+      extra = false,   -- Disables additional keymaps
+   }
+}
+
+-- Custom Comment Keymaps (New)
+vim.keymap.set("n", "gCA", function()
+   require("Comment.api").toggle.linewise.eol()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "gCO", function()
+   require("Comment.api").toggle.linewise.above()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "gCo", function()
+   require("Comment.api").toggle.linewise.below()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "gCC", function()
+   require("Comment.api").toggle.linewise.current()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "gBB", function()
+   require("Comment.api").toggle.blockwise.current()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "gBA", function()
+   require("Comment.api").toggle.blockwise.eol()
+end, { noremap = true, silent = true })
