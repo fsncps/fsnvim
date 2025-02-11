@@ -94,8 +94,8 @@ vim.keymap.set("n", "<C-§>", "<C-§><C-N>", { desc = "Normal Mode from anywhere
 -- Remove conflicting default mappings from Comment.nvim
 require('Comment').setup {
    mappings = {
-      basic = false,   -- Disables `gc` and `gb`
-      extra = false,   -- Disables additional keymaps
+      basic = false, -- Disables `gc` and `gb`
+      extra = false, -- Disables additional keymaps
    }
 }
 
@@ -123,3 +123,9 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "gBA", function()
    require("Comment.api").toggle.blockwise.eol()
 end, { noremap = true, silent = true })
+
+-- Normal Mode
+vim.api.nvim_set_keymap("n", "<C-CR>", ":DBExecuteQuery<CR>", { noremap = true, silent = true })
+
+-- Insert Mode (Exit Insert, then execute)
+vim.api.nvim_set_keymap("i", "<C-CR>", "<Esc>:DBExecuteQuery<CR>", { noremap = true, silent = true })

@@ -1,0 +1,22 @@
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--    pattern = "dbout",
+--    callback = function()
+--       vim.cmd("wincmd J")  -- Move the dbout window to the bottom
+--       vim.cmd("resize 40") -- Adjust height
+--    end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--    pattern = "dbui",
+--    callback = function()
+--       vim.cmd("vertical resize 50") -- Adjust DBUI width
+--    end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--    pattern = "dbsql",
+--    callback = function()
+--       vim.cmd("resize 20") -- Adjust height of SQL query buffer
+--    end,
+-- })
+

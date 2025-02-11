@@ -26,5 +26,5 @@ vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff0000", bg = "NONE" }) -- Red s
 vim.o.fillchars = "vert:│,horiz:─"
 
 vim.g.dbs = {
-	localdb = "mysql://sql_user:dbpass@localhost/test_db"
+   test_db = "mariadb://sql_user:dbpass@localhost/test_db"
 }
