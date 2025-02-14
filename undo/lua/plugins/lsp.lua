@@ -18,19 +18,11 @@ return {
       -- Set up Mason
       require('mason').setup()
       require('mason-lspconfig').setup({
-         ensure_installed = { 'lua_ls', 'pyright', 'bashls', 'texlab', 'sqls' } -- Added sqls
+         ensure_installed = { 'lua_ls', 'pyright', 'bashls', 'texlab' }
       })
 
       local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-      -- Common on_attach function
-      local on_attach = function(client, bufnr)
-         -- Add keybindings or custom behavior for LSPs if needed
-         if client.name == "sqls" then
-            require('sqls').on_attach(client, bufnr)
-         end
-      end
 
       -- Set up lua_ls with Mason
       lspconfig.lua_ls.setup({
@@ -59,19 +51,12 @@ return {
             },
          },
          capabilities = capabilities,
-         on_attach = on_attach,
       })
 
       -- Set up other LSP servers
-      lspconfig.pyright.setup { capabilities = capabilities, on_attach = on_attach }
-      lspconfig.bashls.setup { capabilities = capabilities, on_attach = on_attach }
-      lspconfig.texlab.setup { capabilities = capabilities, on_attach = on_attach }
-
-      -- Set up SQLS
-      lspconfig.sqls.setup {
-         capabilities = capabilities,
-         on_attach = on_attach
-      }
+      lspconfig.pyright.setup { capabilities = capabilities }
+      lspconfig.bashls.setup { capabilities = capabilities }
+      lspconfig.texlab.setup { capabilities = capabilities }
 
       -- Ensure additional tools are installed
       require("mason-tool-installer").setup({

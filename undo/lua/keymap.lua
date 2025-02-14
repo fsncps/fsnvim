@@ -77,7 +77,3 @@ vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
 ---
 vim.keymap.set("n", "<Leader>pp", ":CdProject<CR>", { desc = "Select Project" })
 vim.keymap.set("n", "<Leader>pa", ":CdProjectManualAdd<CR>", { desc = "Add Project" })
-
--- Remove the existing Comment.nvim keybindings
--- vim.opt.hidden = true -- Allows buffers to stay open without being visible
-vim.opt.tabpagemax = 15 -- Max number of tabs
