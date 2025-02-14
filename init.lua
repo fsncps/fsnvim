@@ -23,7 +23,10 @@ require("opts")
 require("fnct")
 require("cmd")
 require("cmd.auto")
-require("conf")
 require("keymap")
+<<<<<<< HEAD
 require('fnct.popup-term').Init_Popup_Term()
+=======
+require("conf")
+>>>>>>> d06ecc7d64874b4372873a889557a3dc5ad6f4f6
 require('misc.eris.eris')

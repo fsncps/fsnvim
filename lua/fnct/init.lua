@@ -26,6 +26,31 @@ local function get_directory(buffer)
    return dir
 end
 
+----KEEP WINDOW WHEN CLOSING BUFFER
+---
+---
+-- local function close_buffer_keep_window()
+--    local current_win = vim.api.nvim_get_current_win()
+--    local buffers = vim.api.nvim_list_bufs()
+--    local current_buf = vim.api.nvim_get_current_buf()
+--
+--    -- Find another buffer to display
+--    for _, buf in ipairs(buffers) do
+--       if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_option(buf, "buflisted") and buf ~= current_buf then
+--          vim.api.nvim_win_set_buf(current_win, buf)
+--          vim.cmd("bdelete! " .. current_buf)
+--          return
+--       end
+--    end
+--
+--    -- If no other buffer is available, simply wipe out the buffer
+--    vim.cmd("bdelete!")
+-- end
+--
+-- -- Create a command for convenience
+-- vim.api.nvim_create_user_command("BDelete", close_buffer_keep_window, { nargs = 0 })
+
+
 local function get_buffer_name(buffer)
    local dir = get_directory(buffer)
    local filename = buffer.filename

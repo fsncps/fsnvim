@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 _G.pinned_buffers = _G.pinned_buffers or {} -- Store pinned buffers per tab
 _G.show_all_buffers = false                 -- Toggle state for showing all buffers
 
@@ -16,6 +17,19 @@ local function save_tab_names()
    end
    vim.fn.writefile(lines, tab_name_file)
 end
+=======
+-- local function get_directory(buffer)
+--    local path = buffer.path
+--    local dir = vim.fn.fnamemodify(path, ":h:t")
+--    return dir
+-- end
+
+-- local function get_buffer_name(buffer)
+--    local dir = get_directory(buffer)
+--    local filename = buffer.filename
+--    return dir .. "/" .. filename
+-- end
+>>>>>>> d06ecc7d64874b4372873a889557a3dc5ad6f4f6
 
 local function load_tab_names()
    if vim.fn.filereadable(tab_name_file) == 1 then
@@ -74,6 +88,7 @@ require("cokeline").setup({
       placement = "left",
       components = {
          {
+<<<<<<< HEAD
             text = function(tab)
                return get_tab_name(tab)
             end,
@@ -86,6 +101,14 @@ require("cokeline").setup({
             bold = function(tab)
                return tab.is_active
             end,
+=======
+            text = "",
+            --    function()
+            --    return vim.g.GIT_STATUS or ""
+            -- end,
+            fg = '#dccd00',
+            bg = '#1e2030',
+>>>>>>> d06ecc7d64874b4372873a889557a3dc5ad6f4f6
          },
       },
    },
@@ -93,6 +116,7 @@ require("cokeline").setup({
    -- 🔹 Display Buffers on the Right
    components = {
       {
+<<<<<<< HEAD
          text = " │ ",
          fg = "#444444",
          bg = "#1e2030",
@@ -138,7 +162,75 @@ require("cokeline").setup({
             fg = "#ffcc00",
             bg = "#1e2030",
          },
+=======
+         text = function(buffer) return ' ' .. buffer.devicon.icon or ' ' end,
+         fg = function(buffer) return buffer.devicon.color or (buffer.is_focused and '#dccd00' or '#888888') end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
       },
+      {
+         text = function(buffer) return buffer.unique_prefix end,
+         fg = function(buffer) return buffer.is_focused and '#dccd00' or '#888888' end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+>>>>>>> d06ecc7d64874b4372873a889557a3dc5ad6f4f6
+      },
+      {
+         text = function(buffer) return '' .. buffer.filename .. '' end,
+         fg = function(buffer) return buffer.is_focused and '#dccd00' or '#888888' end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+      },
+      {
+         text = function(buffer) return buffer.is_focused and ' ' or ' ' end,
+         fg = function(buffer) return buffer.is_focused and '#dccd00' or '#888888' end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+      },
+
+   },
+})
+
+require("lualine").setup({
+   options = {
+      disabled_filetypes = {
+         "neo-tree" -- Disable Lualine for Neotree
+      },
+      theme = "powerline_dark_2",
+      section_separators = '',
+      component_separators = '',
+      globalstatus = true, -- If you want a global status line
+      icons_enabled = true,
+   },
+   sections = {
+      lualine_a = { 'mode' },
+      lualine_b = { 'branch', 'diff', 'diagnostics' },
+      lualine_c = {
+         function()
+            local filepath = vim.fn.expand('%:p')       -- Get absolute path
+            filepath = filepath:gsub(vim.env.HOME, '~') -- Replace $HOME with ~
+            return filepath
+         end, },
+      lualine_x = { 'encoding', 'fileformat', 'filetype' },
+      lualine_y = { 'progress' },
+      lualine_z = { 'location' },
+   },
+   winbar = {
+      lualine_a = { "filename" },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {}
+   },
+
+   inactive_winbar = {
+      lualine_a = { 'filename' },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {}
    },
 })
 

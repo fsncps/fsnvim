@@ -18,3 +18,7 @@ end
 vim.api.nvim_create_user_command('ChatBot', M.run_chatbot, {})
 
 return M
+<<<<<<< HEAD
+=======
+
+>>>>>>> d06ecc7d64874b4372873a889557a3dc5ad6f4f6

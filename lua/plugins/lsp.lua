@@ -6,6 +6,7 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim",       opts = {} },
       { "folke/neodev.nvim",       opts = {} },
+      "nanotee/sqls.nvim", -- Ensure sqls.nvim is installed
       -- Add nvim-cmp and related plugins
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
@@ -18,12 +19,17 @@ return {
       -- Set up Mason
       require('mason').setup()
       require('mason-lspconfig').setup({
+<<<<<<< HEAD
          ensure_installed = { 'lua_ls', 'pyright', 'bashls', 'texlab', 'sqls' } -- Added sqls
+=======
+         ensure_installed = { 'lua_ls', 'pyright', 'bashls', 'texlab', 'sqls' }
+>>>>>>> d06ecc7d64874b4372873a889557a3dc5ad6f4f6
       })
 
       local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+<<<<<<< HEAD
       -- Common on_attach function
       local on_attach = function(client, bufnr)
          -- Add keybindings or custom behavior for LSPs if needed
@@ -31,6 +37,15 @@ return {
             require('sqls').on_attach(client, bufnr)
          end
       end
+=======
+      -- Ensure sqls LSP works
+      lspconfig.sqls.setup({
+         on_attach = function(client, bufnr)
+            require('sqls').on_attach(client, bufnr) -- Ensure sqls.nvim is correctly loaded
+         end,
+         capabilities = capabilities,
+      })
+>>>>>>> d06ecc7d64874b4372873a889557a3dc5ad6f4f6
 
       -- Set up lua_ls with Mason
       lspconfig.lua_ls.setup({
@@ -84,4 +99,3 @@ return {
       })
    end,
 }
-
