@@ -31,15 +31,6 @@ External Requirements:
 
 ### Install fsnvim
 
-Neovim's configurations are located under the following paths, depending on your OS:
-
-| OS              | PATH                       |
-| --------------- | -------------------------- |
-| Linux, macOS    | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
-| Windows (cmd)   | `%localappdata%\nvim\`      |
-| Windows (PowerShell) | `$env:LOCALAPPDATA\nvim\` |
-
-
 [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo and then clone to `$XDG_CONFIG_HOME/nvim`
 
 ```bash
