@@ -6,7 +6,7 @@
 
 WORK IN PROGRESS! *unfinished and subject to change*
 
-Another neovim starting point. I want smooth navigation and a focus on writing, not only coding. The cokeline has both tabs and buffers, and buffers have a association with a tab for ease or organization, toggle with <Leader>bt. 
+Another neovim starting point. I want smooth navigation and a focus on writing, not only coding. The cokeline has both tabs and buffers, and buffers have a association with a tab for ease or organization, toggle with `<Leader>bt`. 
 Focus on LateX: visual lines depending on doc type.
 Clio idea palace to be implemented.
 
