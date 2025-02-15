@@ -30,13 +30,6 @@ External Requirements:
 
 Language Setup (if you plan to work with specific languages):
 
-- **Typescript**: You need `npm`
-- **Golang**: You need `go`
-- **Others**: Install as needed
-
-> **NOTE**  
-> See [Install Recipes](#install-recipes) for additional Windows and Linux-specific notes and quick install snippets.
-
 ### Install FSNVIM
 
 > **NOTE**  
