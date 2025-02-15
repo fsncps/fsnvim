@@ -30,10 +30,7 @@ External Requirements:
 
 Language Setup (if you plan to work with specific languages):
 
-### Install FSNVIM
-
-> **NOTE**  
-> [Backup](#faq) your previous configuration (if any exists).
+### Install fsnvim
 
 Neovim's configurations are located under the following paths, depending on your OS:
 
@@ -43,39 +40,10 @@ Neovim's configurations are located under the following paths, depending on your
 | Windows (cmd)   | `%localappdata%\nvim\`      |
 | Windows (PowerShell) | `$env:LOCALAPPDATA\nvim\` |
 
-#### Recommended Step
 
-[Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo so that you have your own copy that you can modify. Then install by cloning the fork to your machine using one of the commands below, depending on your OS.
-
-> **NOTE**  
-> Your fork's URL will be something like this:  
-> `https://github.com/<your_github_username>/fsnvim.git`
-
-#### Clone FSNVIM
-
-> **NOTE**  
-> If following the recommended step above (i.e., forking the repo), replace `fsncps` with `<your_github_username>` in the commands below.
-
-##### Linux and macOS
+[Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo and then clone to `$XDG_CONFIG_HOME/nvim`
 
 ```bash
 git clone https://github.com/fsncps/fsnvim "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-##### Windows
-
-If you're using cmd.exe:
-
-cmd
-
-```bash
-git clone https://github.com/fsncps/fsnvim %localappdata%\nvim\
-```
-
-If you're using powershell.exe:
-
-powershell
-
-```bash
-git clone https://github.com/fsncps/fsnvim $env:LOCALAPPDATA\nvim\
-```
