@@ -6,11 +6,9 @@
 
 WORK IN PROGRESS! *unfinished and subject to change*
 
-The goal is smooth navigation of projects and a focus on writing and idea generation with sexy UX (due to soely the beauty of Neovim and Lua, by no means this project), ultimately with integration of news and research API controlled by OpenAI and Ollama LLMs, to provide 
-
-- **Lean and modular design**
-- **More fun with your workflow**
-- **Symbiotic idea generation and creation of content**
+Another neovim starting point. I want smooth navigation and a focus on writing, not only coding. The cokeline has both tabs and buffers, and buffers have a association with a tab for ease or organization, toggle with <Leader>bt. 
+Focus on LateX: visual lines depending on doc type.
+Clio idea palace to be implemented.
 
 **NOT** a Neovim distribution, but instead a starting point for your configuration.
 
