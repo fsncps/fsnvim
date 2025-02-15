@@ -31,9 +31,10 @@ External Requirements:
 
 ### Install fsnvim
 
-[Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo and then clone to `$XDG_CONFIG_HOME/nvim`
+Clone to `$XDG_CONFIG_HOME/nvim`
 
 ```bash
 git clone https://github.com/fsncps/fsnvim "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
+Or [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) it first.
