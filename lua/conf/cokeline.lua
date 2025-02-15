@@ -1,45 +1,17 @@
 _G.pinned_buffers = _G.pinned_buffers or {} -- Store pinned buffers per tab
 _G.show_all_buffers = false                 -- Toggle state for showing all buffers
 
-_G.tab_names = {}
+_G.tab_names = {}                           -- No need to persist names anymore
 
 local function get_tab_name(tab)
-   return _G.tab_names[tab.number] or "Tab " .. tab.number
+   local tab_num = tab.number
+   return _G.tab_names[tab_num] or ("___TAB" .. tab_num .. "___")
 end
-
-local tab_name_file = vim.fn.stdpath("data") .. "/tab_names.txt"
-
-local function save_tab_names()
-   local lines = {}
-   for tab, name in pairs(_G.tab_names) do
-      table.insert(lines, tab .. "|" .. name)
-   end
-   vim.fn.writefile(lines, tab_name_file)
-end
-
-local function load_tab_names()
-   if vim.fn.filereadable(tab_name_file) == 1 then
-      local lines = vim.fn.readfile(tab_name_file)
-      for _, line in ipairs(lines) do
-         local tab, name = line:match("^(%d+)|(.+)$")
-         if tab and name then
-            _G.tab_names[tonumber(tab)] = name
-         end
-      end
-   end
-end
-
--- Load tab names on startup
-load_tab_names()
-
--- Save tab names when exiting Neovim
-vim.api.nvim_create_autocmd("VimLeave", { callback = save_tab_names })
 
 vim.api.nvim_create_user_command("RenameTab", function(args)
    local tab_number = vim.fn.tabpagenr()
    _G.tab_names[tab_number] = args.args
    print("Renamed Tab " .. tab_number .. " to: " .. args.args)
-   save_tab_names()
 end, { nargs = 1 })
 
 require("cokeline").setup({
@@ -47,23 +19,13 @@ require("cokeline").setup({
 
    buffers = {
       filter_valid = function(buffer)
-         -- Always keep Neo-tree visible
-         if buffer.filetype == "neo-tree" then
-            return true
-         end
-
-         -- Exclude terminal and empty buffers
-         if buffer.type == "terminal" or buffer.filename == "" then
-            return false
-         end
+         if buffer.filetype == "neo-tree" then return true end
+         if buffer.type == "terminal" or buffer.filename == "" then return false end
 
          local tab_id = vim.fn.tabpagenr()
 
-         if _G.show_all_buffers then
-            return true -- Show all buffers across tabs when toggled
-         end
+         if _G.show_all_buffers then return true end -- Show all buffers when toggled
 
-         -- Default: Only show buffers assigned to the current tab
          local tab_buffers = vim.fn.gettabvar(tab_id, "buffers", {})
          return vim.tbl_contains(tab_buffers, buffer.number)
       end,
@@ -122,11 +84,11 @@ require("cokeline").setup({
             return buffer.is_focused and "bold" or nil
          end,
       },
-      {
-         text = " │ ",
-         fg = "#444444",
-         bg = "#1e2030",
-      },
+      -- {
+      --    text = " │ ",
+      --    fg = "#444444",
+      --    bg = "#1e2030",
+      -- },
    },
 
    -- 🔹 Sidebar integration to keep Neo-tree visible
@@ -146,8 +108,8 @@ require("cokeline").setup({
 vim.keymap.set("n", "<Leader>bt", function()
    _G.show_all_buffers = not _G.show_all_buffers
    print("Toggled buffer visibility: " .. (_G.show_all_buffers and "All Buffers" or "Per Tab"))
-   vim.cmd("redrawtabline")                          -- **Force Cokeline to refresh**
-end, { silent = true, desc = "Toggle Tab Buffers" }) -- ✅ Added description
+   vim.cmd("redrawtabline") -- **Force Cokeline to refresh**
+end, { silent = true, desc = "Toggle Tab Buffers" })
 
 
 -- 🔹 Track buffers per tab
