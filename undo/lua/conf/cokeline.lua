@@ -137,10 +137,3 @@ require("cokeline").setup({
       components = {},
    },
 })
-
--- Keybindings
-vim.keymap.set("n", "<Leader>tn", ":tabnext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>tp", ":tabprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>bn", ":bnext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>bp", ":bprevious<CR>", { noremap = true, silent = true })
-

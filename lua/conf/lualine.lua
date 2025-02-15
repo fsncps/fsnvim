@@ -2,7 +2,8 @@
 
 local colors = {
    black        = '#1e2030',
-   neon         = '#232538',
+   bg           = '#24273a',
+   neon         = '#191c2c',
    white        = '#FFFFFF',
    purple       = '#5F005F',
    blue         = '#21243e',
@@ -20,6 +21,7 @@ local colors = {
    cyan         = '#00DFFF',
    green        = '#212f38',
    lightyellow  = '#fcffbb',
+   bronze       = '#363038',
 }
 
 local custom_theme = {
@@ -31,20 +33,20 @@ local custom_theme = {
    insert = {
       a = { bg = colors.blue, fg = colors.lightyellow },
       b = { bg = colors.blue, fg = colors.lightyellow },
-      c = { bg = colors.blue, fg = colors.lightyellow },
+      c = { bg = colors.black, fg = colors.lightyellow },
    },
    visual = {
       a = { bg = colors.green, fg = colors.lightyellow },
       b = { bg = colors.green, fg = colors.lightyellow },
-      c = { bg = colors.green, fg = colors.lightyellow },
+      c = { bg = colors.black, fg = colors.lightyellow },
    },
    command = {
-      a = { bg = colors.red, fg = colors.lightyellow },
-      b = { bg = colors.red, fg = colors.lightyellow },
-      c = { bg = colors.red, fg = colors.lightyellow },
+      a = { bg = colors.neon, fg = colors.lightyellow },
+      b = { bg = colors.blue, fg = colors.lightyellow },
+      c = { bg = colors.black, fg = colors.lightyellow },
    },
    inactive = {
-      a = { bg = colors.neon, fg = colors.lightgray },
+      a = { bg = colors.bg, fg = colors.lightgray },
       b = { bg = colors.gray, fg = colors.lightgray },
       c = { bg = colors.black, fg = colors.lightgray },
    },
@@ -54,7 +56,7 @@ custom_theme.terminal = custom_theme.insert
 
 require("lualine").setup({
    options = {
-      disabled_filetypes = { "neo-tree" },
+      disabled_filetypes = { "neo-tree", "toggleterm" },
       theme = custom_theme, -- Use the inline custom theme
       section_separators = '',
       component_separators = '',

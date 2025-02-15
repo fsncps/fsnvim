@@ -20,9 +20,6 @@ vim.keymap.set("n", "<C-S-Up>", "<C-w><C-+>", { desc = "Increase window height" 
 --vim.keymap.set('n', '<C-t>', 'require('fnct.popup-term').Toggle_Terminal()')
 -- Both visual and normal mode for each, so you can open with a visual selection or without.
 --vim.keymap.set('n', '<C-t>', 'require('fnct.popup-term').Toggle_Terminal()')
-vim.keymap.set('n', '<C-t>', function()
-   require("fnct.popup-term").Toggle_Terminal()
-end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>E", ":Neotree<CR>")
 
@@ -73,7 +70,6 @@ vim.keymap.set("n", "<Leader>0", ":lua ToggleTrueFalse()<CR>", { desc = "Toggle 
 vim.keymap.set("n", "<C-s>", ":w <CR>", { desc = "Write to file" })
 vim.keymap.set("i", "<C-s>", "<Esc>:w <CR>", { desc = "Write to file" })
 
-vim.keymap.set("n", "<C-q>", ":Bdelete <CR>", { desc = "Close Buffer-Tab" })
 
 vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
 vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
@@ -87,3 +83,29 @@ vim.keymap.set("n", "<Leader>pa", ":CdProjectManualAdd<CR>", { desc = "Add Proje
 -- Remove the existing Comment.nvim keybindings
 -- vim.opt.hidden = true -- Allows buffers to stay open without being visible
 vim.opt.tabpagemax = 15 -- Max number of tabs
+
+
+
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { desc = "" })
+vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { desc = "" })
+vim.keymap.set('t', '<C-Left>', "<Cmd>wincmd h<CR>", { desc = "" })
+vim.keymap.set('t', '<C-Down>', "<Cmd>wincmd j<CR>", { desc = "" })
+vim.keymap.set('t', '<C-Up>', "<C-w><C-k>", { desc = "" })
+vim.keymap.set('t', '<C-Right>', [[<Cmd>wincmd l<CR>]], { desc = "" })
+vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { desc = "" })
+vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { desc = "" })
+vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { desc = "" })
+vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { desc = "" })
+vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], { desc = "" })
+
+
+vim.keymap.set("n", "<Leader>T", ":ToggleTerm size=15 <CR>", { desc = "Add Terminal" })
+vim.keymap.set("n", "<Leader>pa", ":CdProjectManualAdd<CR>", { desc = "Add Project" })
+
+vim.keymap.set("n", "<Leader>tt", ":tabnew<CR>", { desc = "Create Tab" })
+vim.keymap.set("n", "<Leader>tr", ":RenameTab ", { desc = "Rename Tab" })
+vim.keymap.set("n", "<Leader>tn", ":tabnext<CR>", { desc = "Next Tab" })
+vim.keymap.set("n", "<Leader>tp", ":tabprevious<CR>", { desc = "Next Tab" })
+
+vim.keymap.set("n", "<Leader>bn", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>bp", ":bprevious<CR>", { noremap = true, silent = true })

@@ -5,7 +5,7 @@ _G.tab_names = {}                           -- No need to persist names anymore
 
 local function get_tab_name(tab)
    local tab_num = tab.number
-   return _G.tab_names[tab_num] or ("___TAB" .. tab_num .. "___")
+   return _G.tab_names[tab_num] or ("TAB_" .. tab_num)
 end
 
 vim.api.nvim_create_user_command("RenameTab", function(args)
@@ -37,19 +37,24 @@ require("cokeline").setup({
       components = {
          {
             text = function(tab)
-               return get_tab_name(tab)
+               local tabname = get_tab_name(tab)
+               if tab.is_active then
+                  return "   " .. tabname .. "   "
+               else
+                  return tabname
+               end
             end,
             fg = function(tab)
-               return tab.is_active and "#ffffff" or "#888888"
+               return tab.is_active and "#43c121" or "#888888" -- White for active, Grey for inactive
             end,
             bg = function(tab)
-               return tab.is_active and "#1e2030" or "#282c34"
+               return tab.is_active and "#191c2c" or "#1e2030" -- Darker background for active
             end,
             bold = function(tab)
-               return tab.is_active
+               return tab.is_active -- Bold only if active
             end,
          },
-      },
+      }
    },
 
    -- 🔹 Display Buffers on the Right
