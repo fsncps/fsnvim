@@ -27,8 +27,7 @@ External Requirements:
 - Clipboard tool (`xclip`/`xsel`/`win32yank` or other depending on platform)
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
   - If you have it, set `vim.g.have_nerd_font = true` in `init.lua`
-
-Language Setup (if you plan to work with specific languages):
+- Language Setup
 
 ### Install fsnvim
 
