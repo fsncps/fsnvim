@@ -1,0 +1,18 @@
+-- function DeleteBufferPreserveWindow()
+--    -- Get the current buffer ID
+--    local current_buf = vim.api.nvim_get_current_buf()
+--
+--    -- Get all listed buffers
+--    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+--
+--    -- If there's more than one buffer, delete the current buffer
+--    if #buffers > 1 then
+--       vim.cmd("Bdelete " .. current_buf)
+--    else
+--       -- If it's the last buffer, replace it with an empty buffer
+--       vim.cmd("enew") -- Opens a new empty buffer instead of closing the window
+--    end
+-- end
+--
+-- -- Keybinding: Use <C-q> to delete a buffer while keeping the window open
+-- vim.keymap.set("n", "<A-q>", DeleteBufferPreserveWindow, { desc = "Close Buffer but Keep Window" })

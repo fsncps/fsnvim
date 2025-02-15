@@ -71,7 +71,7 @@ vim.keymap.set("n", "<C-q>", ":Bdelete <CR>", { desc = "Close Buffer-Tab" })
 
 vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
 vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
-
+vim.keymap.set("n", "<A-q>", ":Bufdelete<CR>", { desc = "Close Buffer but Keep Window" })
 
 ---prodect-cd
 ---

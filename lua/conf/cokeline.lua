@@ -184,6 +184,7 @@ vim.keymap.set("n", "<Leader>tp", function()
    vim.cmd("tabprevious " .. prev_tab)
 end, { noremap = true, silent = true })
 
+
 -- 🔹 Switch between buffers
 vim.keymap.set("n", "<Leader>bn", ":bnext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>bp", ":bprevious<CR>", { noremap = true, silent = true })
