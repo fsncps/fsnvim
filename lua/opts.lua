@@ -24,5 +24,5 @@ vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 
 vim.g.dbs = {
-   test_db = "mariadb://sql_user:dbpass@localhost/test_db"
+   test_db = "mysql://mysql_user:dbpass@localhost/test_db"
 }
