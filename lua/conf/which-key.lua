@@ -1,26 +1,45 @@
 local wk = require("which-key")
 
--- Initialize which-key with setup
-wk.setup({
-   plugins = {
-      marks = true,
-      registers = true,
-      spelling = { enabled = true, suggestions = 20 },
-   },
-   window = {
-      border = "rounded",
-      position = "bottom",
-      margin = { 1, 0, 1, 0 },
-      padding = { 1, 1, 1, 1 },
-   },
-   layout = {
-      height = { min = 4, max = 25 },
-      width = { min = 20, max = 50 },
-      spacing = 3,
-      align = "left",
-   },
-   triggers = { { "<leader>", mode = { "n", "v" } } }, -- Manual triggers for which-key
-})
+-- -- Initialize which-key with setup
+-- wk.setup({
+--    plugins = {
+--       marks = true,
+--       registers = true,
+--       spelling = { enabled = true, suggestions = 20 },
+--    },
+--    window = {
+--       border = "rounded",
+--       position = "bottom",
+--       margin = { 1, 0, 1, 0 },
+--       padding = { 1, 1, 1, 1 },
+--    },
+--    layout = {
+--       height = { min = 4, max = 25 },
+--       width = { min = 20, max = 50 },
+--       spacing = 3,
+--       align = "left",
+--    },
+--    triggers = { { "<leader>", mode = { "n", "v" } } }, -- Manual triggers for which-key
+--    -- Add missing required fields
+--    opts = {
+--       preset = true,                               -- Enable default presets
+--       delay = 300,                                 -- Time (ms) before showing WhichKey popup
+--       filter = nil,                                -- Optional filter function
+--       spec = nil,                                  -- Extra key mappings (can be nil)
+--       notify = true,                               -- Use notifications
+--       defer = false,                               -- Defer loading of WhichKey
+--       win = {},                                    -- Window settings
+--       keys = {},                                   -- Custom keymap settings
+--       sort = true,                                 -- Sort keys in the WhichKey popup
+--       expand = nil,                                -- Function to expand custom keys
+--       replace = false,                             -- Replace default mappings
+--       icons = { breadcrumb = "»", separator = "➜", group = "+" },
+--       show_help = true,                            -- Show help text
+--       show_keys = true,                            -- Show keys in popup
+--       disable = { buftypes = {}, filetypes = {} }, -- Disable in specific buffers or files
+--       debug = false,                               -- Enable debug mode
+--    }
+-- })
 
 -- Use `which-key.add()` for mapping spec
 wk.add({
@@ -80,4 +99,3 @@ wk.add({
    { "<C-Up>",     "<C-w><C-k>",                             desc = "Move focus up" },
    { "<C-Down>",   "<C-w><C-j>",                             desc = "Move focus down" },
 })
-

@@ -55,40 +55,30 @@ require("cokeline").setup({
    -- 🔹 Display Buffers on the Right
    components = {
       {
-         text = " │ ",
-         fg = "#444444",
-         bg = "#1e2030",
+         text = function(buffer) return ' ' .. buffer.devicon.icon or ' ' end,
+         fg = function(buffer) return buffer.devicon.color or (buffer.is_focused and '#dccd00' or '#888888') end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
       },
       {
-         text = function(buffer)
-            return buffer.devicon.icon or ""
-         end,
-         fg = function(buffer)
-            return buffer.devicon.color or (buffer.is_focused and "#00ff00" or "#888888")
-         end,
-         bg = function(buffer)
-            return buffer.is_modified and "#472929" or "#24273a"
-         end,
+         text = function(buffer) return buffer.unique_prefix end,
+         fg = function(buffer) return buffer.is_focused and '#dccd00' or '#888888' end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
       },
       {
-         text = function(buffer)
-            return buffer.filename
-         end,
-         fg = function(buffer)
-            return buffer.is_focused and "#72ad24" or "#888888"
-         end,
-         bg = function(buffer)
-            return buffer.is_modified and "#472929" or "#24273a"
-         end,
-         style = function(buffer)
-            return buffer.is_focused and "bold" or nil
-         end,
+         text = function(buffer) return '' .. buffer.filename .. '' end,
+         fg = function(buffer) return buffer.is_focused and '#dccd00' or '#888888' end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
       },
-      -- {
-      --    text = " │ ",
-      --    fg = "#444444",
-      --    bg = "#1e2030",
-      -- },
+      {
+         text = function(buffer) return buffer.is_focused and ' ' or ' ' end,
+         fg = function(buffer) return buffer.is_focused and '#dccd00' or '#888888' end,
+         bg = function(buffer) return buffer.is_modified and '#473131' or '#1e2030' end,
+         style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+      },
+
    },
 
    -- 🔹 Sidebar integration to keep Neo-tree visible

@@ -21,6 +21,7 @@ vim.opt.termguicolors = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.swapfile = false
+vim.opt.foldenable = false
 ---vim.opt.clipboard = "unnamedplus"
 
 -- vim.g.dbs = {
