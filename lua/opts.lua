@@ -42,3 +42,5 @@ vim.g.lazygit_config_file_path = '' -- custom config file path
 vim.g.lazygit_config_file_path = {} -- table of custom config file paths
 
 vim.g.lazygit_on_exit_callback = nil -- optional function callback when exiting lazygit (useful for example to refresh some UI elements after lazy git has made some changes)
+
+vim.opt.showtabline = 2 -- Always show the tabline, even if only one tab is open

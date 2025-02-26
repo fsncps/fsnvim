@@ -1,10 +1,11 @@
-vim.api.nvim_create_autocmd({ "VimEnter", "TabEnter" }, {
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
    callback = function()
       vim.cmd("Neotree")
       vim.cmd("Neotree toggle")
       vim.cmd("Neotree toggle")
    end,
 })
+
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
    callback = function()

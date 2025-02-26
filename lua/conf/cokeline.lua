@@ -33,7 +33,7 @@ require("cokeline").setup({
 
    -- 🔹 Display Tabs on the Left
    tabs = {
-      placement = "left",
+      placement = "right",
       components = {
          {
             text = function(tab)
@@ -48,7 +48,7 @@ require("cokeline").setup({
                return tab.is_active and "#43c121" or "#888888" -- White for active, Grey for inactive
             end,
             bg = function(tab)
-               return tab.is_active and "#191c2c" or "#1e2030" -- Darker background for active
+               return tab.is_active and "#132b06" or "#0d1d04" -- Darker background for active
             end,
             bold = function(tab)
                return tab.is_active -- Bold only if active
