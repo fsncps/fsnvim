@@ -1,4 +1,4 @@
-vim.cmd("colorscheme catppuccin-macchiato")
+vim.cmd("colorscheme catppuccin-frappe")
 vim.cmd([[highlight MsgArea guibg=#24273a guifg=#7ce322]])
 vim.cmd([[highlight Pmenu guibg=#1e2030]])
 vim.cmd([[highlight PmenuSel guibg=#f5a97f guifg=#24273a]])
