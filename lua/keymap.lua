@@ -62,8 +62,8 @@ vim.keymap.set('n', '<S-Down>', custom_down,
    { silent = true, desc = "Move down or jump to bottom if less than 23 lines to bottom" })
 
 -- Key mappings for tab navigation
-vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Move focus to the upper window" })
+-- vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { desc = "Move focus to the upper window" })
+-- vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Move focus to the upper window" })
 
 vim.keymap.set("n", "<Leader>0", ":lua ToggleTrueFalse()<CR>", { desc = "Toggle Boolean" })
 
@@ -73,7 +73,26 @@ vim.keymap.set("i", "<C-s>", "<Esc>:w <CR>", { desc = "Write to file" })
 
 vim.keymap.set('n', '<A-c>', '"+y', { desc = 'Yank to "+"' })
 vim.keymap.set('v', '<A-c>', '"+y', { desc = 'Yank to "+"' })
-vim.keymap.set("n", "<A-q>", ":Bufdelete<CR>", { desc = "Close Buffer but Keep Window" })
+vim.keymap.set("n", "<A-q>", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  if vim.bo.modified then
+    if vim.fn.confirm("Buffer has unsaved changes. Close anyway?", "&Yes\n&No", 2) ~= 1 then
+      return
+    end
+  end
+
+  -- Close the buffer but preserve window layout
+  local ok = pcall(function()
+    vim.cmd("lua require('bufdelete').bufdelete(" .. bufnr .. ", true)")
+  end)
+
+  if not ok then
+    -- fallback if bufdelete not found
+    vim.cmd("bdelete!")
+  end
+end, { desc = "Close buffer with confirmation if modified" })
+
+
 
 ---prodect-cd
 ---
