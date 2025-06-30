@@ -11,3 +11,4 @@ build/*
 # Ignore the config file
 config.yaml
 /undo/*
+.bu-undo/
