@@ -32,30 +32,30 @@ require("cokeline").setup({
    },
 
    -- 🔹 Display Tabs on the Left
-   tabs = {
-      placement = "right",
-      components = {
-         {
-            text = function(tab)
-               local tabname = get_tab_name(tab)
-               if tab.is_active then
-                  return "   " .. tabname .. "   "
-               else
-                  return tabname
-               end
-            end,
-            fg = function(tab)
-               return tab.is_active and "#43c121" or "#888888" -- White for active, Grey for inactive
-            end,
-            bg = function(tab)
-               return tab.is_active and "#132b06" or "#0d1d04" -- Darker background for active
-            end,
-            bold = function(tab)
-               return tab.is_active -- Bold only if active
-            end,
-         },
-      }
-   },
+   -- tabs = {
+   --    placement = "right",
+   --    components = {
+   --       {
+   --          text = function(tab)
+   --             local tabname = get_tab_name(tab)
+   --             if tab.is_active then
+   --                return "   " .. tabname .. "   "
+   --             else
+   --                return tabname
+   --             end
+   --          end,
+   --          fg = function(tab)
+   --             return tab.is_active and "#43c121" or "#888888" -- White for active, Grey for inactive
+   --          end,
+   --          bg = function(tab)
+   --             return tab.is_active and "#132b06" or "#0d1d04" -- Darker background for active
+   --          end,
+   --          bold = function(tab)
+   --             return tab.is_active -- Bold only if active
+   --          end,
+   --       },
+   --    }
+   -- },
 
    -- 🔹 Display Buffers on the Right
    components = {
