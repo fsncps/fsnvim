@@ -1,87 +1,97 @@
 return {
-   "neovim/nvim-lspconfig",
-   dependencies = {
-      { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      { "j-hui/fidget.nvim",       opts = {} },
-      { "folke/neodev.nvim",       opts = {} },
-      -- Add nvim-cmp and related plugins
-      "hrsh7th/nvim-cmp",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
-      "L3MON4D3/LuaSnip",
-   },
-   config = function()
-      -- Set up Mason
-      require('mason').setup()
-      require('mason-lspconfig').setup({
-         ensure_installed = { 'lua_ls', 'pyright', 'bashls', 'texlab', 'sqls' } -- Added sqls
-      })
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    { "williamboman/mason.nvim", config = true },
+    {
+      "mason-org/mason-lspconfig.nvim",
+      opts = {
+        ensure_installed = { "lua_ls", "pyright", "bashls", "texlab", "sqls" },
+      },
+      dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+      },
+    },
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    { "j-hui/fidget.nvim", opts = {} },
+    { "folke/neodev.nvim", opts = {} },
+    -- nvim-cmp and friends
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "saadparwaiz1/cmp_luasnip",
+    "L3MON4D3/LuaSnip",
+    "saghen/blink.cmp", -- <== make sure this is included
+  },
+  config = function()
+    require("mason").setup()
 
-      local lspconfig = require('lspconfig')
-      local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-      -- Common on_attach function
-      local on_attach = function(client, bufnr)
-         -- Add keybindings or custom behavior for LSPs if needed
-         if client.name == "sqls" then
-            require('sqls').on_attach(client, bufnr)
-         end
-      end
-
-      -- Set up lua_ls with Mason
-      lspconfig.lua_ls.setup({
-         settings = {
-            Lua = {
-               format = {
-                  enable = true,
-                  defaultConfig = {
-                     indent_style = "space",
-                     indent_size = "3",
-                  },
-               },
-               runtime = {
-                  version = 'LuaJIT',
-                  path = vim.split(package.path, ';'),
-               },
-               diagnostics = {
-                  globals = { 'vim' },
-               },
-               workspace = {
-                  library = vim.api.nvim_get_runtime_file("", true),
-               },
-               telemetry = {
-                  enable = false,
-               },
-            },
-         },
-         capabilities = capabilities,
-         on_attach = on_attach,
-      })
-
-      -- Set up other LSP servers
-      lspconfig.pyright.setup { capabilities = capabilities, on_attach = on_attach }
-      lspconfig.bashls.setup { capabilities = capabilities, on_attach = on_attach }
-      lspconfig.texlab.setup { capabilities = capabilities, on_attach = on_attach }
-
-      -- Set up SQLS
-      lspconfig.sqls.setup {
-         capabilities = capabilities,
-         on_attach = on_attach
-      }
-
-      -- Ensure additional tools are installed
+    vim.schedule(function()
       require("mason-tool-installer").setup({
-         ensure_installed = {
-            "stylua",      -- Used to format Lua code
-            "black",       -- Used to format Python code
-            "shfmt",       -- Used to format Shell scripts
-            "latexindent", -- Used to format LaTeX code
-         },
+        ensure_installed = {
+          "stylua",
+          "black",
+          "shfmt",
+          "latexindent",
+        },
       })
-   end,
+    end)
+
+    local lspconfig = require("lspconfig")
+
+    -- Optional: additional custom capabilities (folding, etc.)
+    local custom_capabilities = {
+      textDocument = {
+        foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        },
+      },
+    }
+
+    -- Final merged capabilities via blink.cmp
+    local capabilities = require("blink.cmp").get_lsp_capabilities(
+      vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), custom_capabilities)
+    )
+
+    local function on_attach(client, bufnr)
+      if client.name == "sqls" then
+        local ok, sqls = pcall(require, "sqls")
+        if ok then sqls.on_attach(client, bufnr) end
+      end
+    end
+
+    local servers = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false },
+            format = {
+              enable = true,
+              defaultConfig = {
+                indent_style = "space",
+                indent_size = "3",
+              },
+            },
+          },
+        },
+      },
+      pyright = {},
+      bashls = {},
+      texlab = {},
+      sqls = {},
+    }
+
+    for name, config in pairs(servers) do
+      config.capabilities = capabilities
+      config.on_attach = config.on_attach or on_attach
+      lspconfig[name].setup(config)
+    end
+  end,
 }
+
 
