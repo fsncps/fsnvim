@@ -3,6 +3,8 @@ local preview_ns = {
 	buf = nil,
 	enabled = false,
 }
+
+local api = require("nvim-tree.api")
 local M = {}
 local function open_preview(path)
 	local buf = vim.api.nvim_create_buf(false, true)
@@ -75,7 +77,6 @@ function M.ToggleNvimTreePreview()
 		end,
 	})
 
-	local api = require("nvim-tree.api")
 	local group = vim.api.nvim_create_augroup("NvimTreePreview", { clear = true })
 
 	local function show_selected_node()
@@ -129,6 +130,20 @@ function M.focus_current_file_in_tree()
 	api.tree.find_file()
 end
 
-return M
 -- Keybind (adjust as needed)
 -- vim.keymap.set("n", "<leader>P", ToggleNvimTreePreview, { desc = "Toggle NvimTree live preview" })
+
+----ROOT TO BUFFER PARENT
+
+function M.set_tree_root_to_buffer_dir()
+	local file = vim.api.nvim_buf_get_name(0)
+	if file == "" then
+		vim.notify("No file open in current buffer", vim.log.levels.WARN)
+		return
+	end
+	local dir = vim.fn.fnamemodify(file, ":p:h") -- full absolute path to parent
+	api.tree.change_root(dir)
+	vim.notify("NvimTree root set to: " .. dir)
+end
+
+return M

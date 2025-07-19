@@ -134,3 +134,7 @@ vim.keymap.set("n", "<Leader>bp", ":bprevious<CR>", { noremap = true, silent = t
 vim.keymap.set("n", "<leader>F", require("cmd.nvimTree").focus_current_file_in_tree, {
 	desc = "Reveal current file in NvimTree",
 })
+--- set root to buffer root
+vim.keymap.set("n", "<leader>R", require("cmd.nvimTree").set_tree_root_to_buffer_dir, {
+	desc = "Set NvimTree root to current buffer",
+})
