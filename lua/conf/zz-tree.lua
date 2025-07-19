@@ -1,4 +1,5 @@
 local api = require("nvim-tree.api")
+local tree = require("cmd.nvimTree")
 
 local function on_attach(bufnr)
 	local function opts(desc)
@@ -10,14 +11,40 @@ local function on_attach(bufnr)
 			buffer = bufnr,
 		}
 	end
+	local function smart_open_node()
+		local node = api.tree.get_node_under_cursor()
+		if not node then
+			return
+		end
+
+		if node.type == "directory" and not node.parent then
+			return -- skip action on root
+		end
+
+		api.node.open.edit()
+	end
+
 	local keymap = vim.keymap.set
+	keymap("n", "<BS>", function()
+		local node = api.tree.get_node_under_cursor()
+		if not node then
+			return
+		end
+
+		-- Move cursor to parent (one up in the tree)
+		api.node.navigate.parent()
+
+		-- Enter that directory (i.e. change root to it)
+		api.node.open.edit()
+	end, opts("Go up to parent directory"))
+
 	keymap("n", "R", api.tree.reload, opts("Refresh"))
 	keymap("n", "<C-k>", api.node.show_info_popup, opts("Info"))
 	keymap("n", "S", api.tree.search_node, opts("Search"))
 	keymap("n", "W", api.tree.collapse_all, opts("Collapse All"))
 	keymap("n", "<Left>", api.node.navigate.parent_close, opts("Collapse Node"))
 	keymap("n", "q", api.tree.close, opts("Close"))
-	keymap("n", "<BS>", api.node.navigate.parent_close, opts("Close Directory"))
+	-- keymap("n", "<BS>", api.node.navigate.parent_close, opts("Close Directory"))
 	keymap("n", "gy", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
 	keymap("n", "ge", api.fs.copy.basename, opts("Copy Basename"))
 	keymap("n", "c", api.fs.copy.node, opts("Copy"))
@@ -27,7 +54,7 @@ local function on_attach(bufnr)
 	keymap("n", "d", api.fs.remove, opts("Delete"))
 	keymap("n", "bd", api.marks.bulk.delete, opts("Delete Bookmarked"))
 	keymap("n", "E", api.tree.expand_all, opts("Expand All"))
-	keymap("n", "<Right>", api.node.open.edit, opts("Expand Node"))
+	-- keymap("n", "<Right>", api.node.open.edit, opts("Expand Node"))
 	keymap("n", "F", api.live_filter.clear, opts("Live Filter: Clear"))
 	keymap("n", "f", api.live_filter.start, opts("Live Filter: Start"))
 	keymap("n", "g?", api.tree.toggle_help, opts("Help"))
@@ -41,11 +68,10 @@ local function on_attach(bufnr)
 	keymap("n", "H", api.tree.toggle_hidden_filter, opts("Toggle Filter: Dotfiles"))
 	keymap("n", "L", api.node.open.toggle_group_empty, opts("Toggle Group Empty"))
 	keymap("n", "<C-h>", api.node.open.horizontal, opts("Open: Horizontal Split"))
-	keymap("n", "<CR>", api.node.open.edit, opts("Open"))
+	-- keymap("n", "<CR>", api.node.open.edit, opts("Open"))
 	keymap("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
 	keymap("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
 	keymap("n", "<C-v>", api.node.open.vertical, opts("Open: Vertical Split"))
-	keymap("n", "P", api.node.navigate.parent, opts("Parent Directory"))
 	keymap("n", "p", api.fs.paste, opts("Paste"))
 	keymap("n", ".", api.tree.change_root_to_node, opts("CD"))
 	keymap("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
@@ -57,6 +83,12 @@ local function on_attach(bufnr)
 	keymap("n", "bt", api.marks.bulk.trash, opts("Trash Bookmarked"))
 	keymap("n", "D", api.fs.trash, opts("Trash"))
 	keymap("n", "bmv", api.marks.bulk.move, opts("Move Bookmarked"))
+	keymap("n", "P", tree.ToggleNvimTreePreview, { desc = "Toggle NvimTree live preview" })
+
+	keymap("n", ">", api.node.show_info_popup, { desc = "Toggle NvimTree live preview" })
+	local lib = require("nvim-tree.lib")
+	keymap("n", "<CR>", smart_open_node, opts("Open file/directory"))
+	keymap("n", "<Right>", smart_open_node, opts("Open file/directory"))
 end
 
 require("nvim-tree").setup({
@@ -140,9 +172,9 @@ require("nvim-tree").setup({
 					color = true,
 				},
 			},
-			git_placement = "before",
+			git_placement = "signcolumn",
 			modified_placement = "after",
-			hidden_placement = "after",
+			hidden_placement = "before",
 			diagnostics_placement = "signcolumn",
 			bookmarks_placement = "signcolumn",
 			padding = {
@@ -193,7 +225,7 @@ require("nvim-tree").setup({
 		auto_open = true,
 	},
 	update_focused_file = {
-		enable = false,
+		enable = true,
 		update_root = {
 			enable = false,
 			ignore_list = {},
@@ -206,7 +238,7 @@ require("nvim-tree").setup({
 	},
 	git = {
 		enable = true,
-		show_on_dirs = true,
+		show_on_dirs = false,
 		show_on_open_dirs = true,
 		disable_for_dirs = {},
 		timeout = 400,
@@ -235,7 +267,7 @@ require("nvim-tree").setup({
 	},
 	filters = {
 		enable = true,
-		git_ignored = true,
+		git_ignored = false,
 		dotfiles = false,
 		git_clean = false,
 		no_buffer = false,
@@ -299,19 +331,19 @@ require("nvim-tree").setup({
 	trash = {
 		cmd = "gio trash",
 	},
-	tab = {
-		sync = {
-			open = false,
-			close = false,
-			ignore = {},
-		},
-	},
+	-- tab = {
+	-- 	sync = {
+	-- 		open = false,
+	-- 		close = false,
+	-- 		ignore = {},
+	-- 	},
+	-- },
 	notify = {
 		threshold = vim.log.levels.INFO,
 		absolute_path = true,
 	},
 	help = {
-		sort_by = "key",
+		sort_by = "desc",
 	},
 	ui = {
 		confirm = {

@@ -116,3 +116,11 @@ vim.api.nvim_create_autocmd("WinLeave", {
 -- 		end
 -- 	end,
 -- })
+
+-----CHANGE TREE ROOT ON CD
+vim.api.nvim_create_autocmd("DirChanged", {
+	group = vim.api.nvim_create_augroup("NvimTreeDirTrack", { clear = true }),
+	callback = function()
+		require("nvim-tree.api").tree.change_root(vim.fn.getcwd())
+	end,
+})
