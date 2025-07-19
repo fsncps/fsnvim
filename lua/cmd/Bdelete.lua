@@ -1,35 +1,30 @@
 vim.api.nvim_create_user_command("Bufdelete", function()
-	local buf = vim.api.nvim_get_current_buf()
-	local alt_buf = vim.fn.bufnr("#") -- Get the alternate buffer
-	local buffers = vim.fn.getbufinfo({ buflisted = 1 }) -- Get all listed buffers
-	local wins = vim.api.nvim_list_wins()
+	local current_win = vim.api.nvim_get_current_win()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local alt_buf = vim.fn.bufnr("#")
+	local listed_bufs = vim.tbl_filter(function(b)
+		return vim.api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted
+	end, vim.api.nvim_list_bufs())
 
-	-- Close NeoTree if it's open in any window
-	for _, win in ipairs(wins) do
-		local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win))
-		if bufname:match("NvimTree.*") then
-			vim.cmd("NvimTreeClose")
-		end
-	end
-
-	-- If there are multiple buffers, switch before deleting
-	if #buffers > 1 then
-		if vim.api.nvim_buf_is_valid(alt_buf) and vim.bo[alt_buf].buflisted then
-			vim.cmd("buffer " .. alt_buf) -- Switch to the alternate buffer
+	-- Only switch buffers if more than one listed buffer exists
+	if #listed_bufs > 1 then
+		-- Pick an alternate valid buffer (fallback to bnext)
+		if vim.api.nvim_buf_is_valid(alt_buf) and alt_buf ~= current_buf and vim.bo[alt_buf].buflisted then
+			vim.api.nvim_set_current_buf(alt_buf)
 		else
-			vim.cmd("bnext") -- Otherwise, switch to the next available buffer
+			vim.cmd("bnext")
 		end
 	else
-		vim.cmd("enew") -- If it's the last buffer, create a new empty buffer
+		-- Open a new empty buffer if this is the last listed one
+		vim.cmd("enew")
 	end
 
-	-- Delete the original buffer
-	vim.cmd("bdelete " .. buf)
+	-- At this point, current_buf is no longer visible in any window
+	-- Now it’s safe to delete it without affecting layout
+	vim.cmd("bdelete " .. current_buf)
 
-	-- Reopen NeoTree if necessary
-	-- vim.cmd("Neotree")
-	vim.cmd("NvimTreeOpen")
-	vim.cmd("wincmd l") -- Move focus to the right window
+	-- Optional: Reopen NvimTree if you want
+	-- vim.cmd("NvimTreeOpen")
 end, {})
 
-vim.keymap.set("n", "<A-q>", ":Bufdelete<CR>", { desc = "Close Buffer but Keep Window" })
+vim.keymap.set("n", "<A-9>", ":Bufdelete<CR>", { desc = "Close buffer but keep layout" })
