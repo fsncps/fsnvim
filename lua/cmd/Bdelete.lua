@@ -6,6 +6,7 @@ vim.api.nvim_create_user_command("Bufdelete", function()
 		return vim.api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted
 	end, vim.api.nvim_list_bufs())
 
+	vim.cmd("NvimTreeClose")
 	-- Only switch buffers if more than one listed buffer exists
 	if #listed_bufs > 1 then
 		-- Pick an alternate valid buffer (fallback to bnext)
@@ -24,7 +25,7 @@ vim.api.nvim_create_user_command("Bufdelete", function()
 	vim.cmd("bdelete " .. current_buf)
 
 	-- Optional: Reopen NvimTree if you want
-	-- vim.cmd("NvimTreeOpen")
+	vim.cmd("NvimTreeOpen")
 end, {})
 
-vim.keymap.set("n", "<A-9>", ":Bufdelete<CR>", { desc = "Close buffer but keep layout" })
+vim.keymap.set("n", "<A-q>", ":Bufdelete<CR>", { desc = "Close buffer but keep layout" })

@@ -26,46 +26,87 @@ vim.keymap.set("n", "<space>B", ":Telescope file_browser path=%:p:h select_buffe
 ---
 ---
 -- Key mappings for buffer picking and navigation
-vim.keymap.set("n", "<leader>bp", "<Plug>(cokeline-pick-focus)", { silent = true, desc = "Pick buffer to focus" })
-vim.keymap.set("n", "<leader>bc", "<Plug>(cokeline-pick-close)", { silent = true, desc = "Pick buffer to close" })
-vim.keymap.set("n", "<A-Right>", "<Plug>(cokeline-focus-next)", { silent = true, desc = "Focus next buffer" })
-vim.keymap.set("n", "<A-Left>", "<Plug>(cokeline-focus-prev)", { silent = true, desc = "Focus previous buffer" })
-
+vim.keymap.set(
+    "n",
+    "<leader>bp",
+    "<Plug>(cokeline-pick-focus)",
+    { silent = true, desc = "Pick buffer to focus" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>bc",
+    "<Plug>(cokeline-pick-close)",
+    { silent = true, desc = "Pick buffer to close" }
+)
+vim.keymap.set(
+    "n",
+    "<A-Right>",
+    "<Plug>(cokeline-focus-next)",
+    { silent = true, desc = "Focus next buffer" }
+)
+vim.keymap.set(
+    "n",
+    "<A-Left>",
+    "<Plug>(cokeline-focus-prev)",
+    { silent = true, desc = "Focus previous buffer" }
+)
+vim.keymap.set(
+    "n",
+    "<C-Tab>",
+    "<Plug>(cokeline-focus-next)",
+    { silent = true, desc = "Focus next buffer" }
+)
+vim.keymap.set(
+    "n",
+    "<C-S-Tab>",
+    "<Plug>(cokeline-focus-prev)",
+    { silent = true, desc = "Focus previous buffer" }
+)
 -- Key mappings for switching buffers
-vim.keymap.set("n", "<S-A-Right>", "<Plug>(cokeline-switch-next)", { silent = true, desc = "Move buffer on line" })
-vim.keymap.set("n", "<S-A-Left>", "<Plug>(cokeline-switch-prev)", { silent = true, desc = "Move bufer on line" })
+vim.keymap.set(
+    "n",
+    "<S-A-Right>",
+    "<Plug>(cokeline-switch-next)",
+    { silent = true, desc = "Move buffer on line" }
+)
+vim.keymap.set(
+    "n",
+    "<S-A-Left>",
+    "<Plug>(cokeline-switch-prev)",
+    { silent = true, desc = "Move bufer on line" }
+)
 --mappings for switching buffers
 --
 local function custom_up()
-	local current_line = vim.fn.line(".")
-	if current_line <= 23 then
-		vim.api.nvim_win_set_cursor(0, { 1, 0 })
-	else
-		vim.cmd("normal! 23k")
-	end
+    local current_line = vim.fn.line(".")
+    if current_line <= 23 then
+        vim.api.nvim_win_set_cursor(0, { 1, 0 })
+    else
+        vim.cmd("normal! 23k")
+    end
 end
 
 local function custom_down()
-	local line_count = vim.api.nvim_buf_line_count(0)
-	local current_line = vim.fn.line(".")
-	if (line_count - current_line) < 23 then
-		vim.api.nvim_win_set_cursor(0, { line_count, 0 })
-	else
-		vim.cmd("normal! 23j")
-	end
+    local line_count = vim.api.nvim_buf_line_count(0)
+    local current_line = vim.fn.line(".")
+    if (line_count - current_line) < 23 then
+        vim.api.nvim_win_set_cursor(0, { line_count, 0 })
+    else
+        vim.cmd("normal! 23j")
+    end
 end
 
 vim.keymap.set(
-	"n",
-	"<S-Up>",
-	custom_up,
-	{ silent = true, desc = "Move up or jump to top if less than 23 lines to top" }
+    "n",
+    "<S-Up>",
+    custom_up,
+    { silent = true, desc = "Move up or jump to top if less than 23 lines to top" }
 )
 vim.keymap.set(
-	"n",
-	"<S-Down>",
-	custom_down,
-	{ silent = true, desc = "Move down or jump to bottom if less than 23 lines to bottom" }
+    "n",
+    "<S-Down>",
+    custom_down,
+    { silent = true, desc = "Move down or jump to bottom if less than 23 lines to bottom" }
 )
 
 -- Key mappings for tab navigation
@@ -79,24 +120,6 @@ vim.keymap.set("i", "<C-s>", "<Esc>:w <CR>", { desc = "Write to file" })
 
 vim.keymap.set("n", "<A-c>", '"+y', { desc = 'Yank to "+"' })
 vim.keymap.set("v", "<A-c>", '"+y', { desc = 'Yank to "+"' })
-vim.keymap.set("n", "<A-q>", function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	if vim.bo.modified then
-		if vim.fn.confirm("Buffer has unsaved changes. Close anyway?", "&Yes\n&No", 2) ~= 1 then
-			return
-		end
-	end
-
-	-- Close the buffer but preserve window layout
-	local ok = pcall(function()
-		vim.cmd("lua require('bufdelete').bufdelete(" .. bufnr .. ", true)")
-	end)
-
-	if not ok then
-		-- fallback if bufdelete not found
-		vim.cmd("bdelete!")
-	end
-end, { desc = "Close buffer with confirmation if modified" })
 
 ---prodect-cd
 ---
@@ -132,9 +155,25 @@ vim.keymap.set("n", "<Leader>bp", ":bprevious<CR>", { noremap = true, silent = t
 
 -----jump to file in tree
 vim.keymap.set("n", "<leader>F", require("cmd.nvimTree").focus_current_file_in_tree, {
-	desc = "Reveal current file in NvimTree",
+    desc = "Reveal current file in NvimTree",
 })
 --- set root to buffer root
 vim.keymap.set("n", "<leader>R", require("cmd.nvimTree").set_tree_root_to_buffer_dir, {
-	desc = "Set NvimTree root to current buffer",
+    desc = "Set NvimTree root to current buffer",
 })
+
+-- Use <Tab> and <S-Tab> to cycle through completions in command-line mode
+-- vim.keymap.set("c", "<Tab>", "<C-n>", { noremap = true })
+-- vim.keymap.set("c", "<S-Tab>", "<C-p>", { noremap = true })
+vim.keymap.set("c", "<Tab>", function()
+    -- If wildmenu is visible, accept with <C-y>
+    if vim.fn.wildmenumode() == 1 then
+        return "<C-y>"
+    else
+        -- Otherwise just move forward (trigger completion)
+        return "<C-n>"
+    end
+end, { expr = true })
+-- Optional: allow arrow keys to cycle through command-line completions
+vim.keymap.set("c", "<Down>", "<C-n>", { noremap = true })
+vim.keymap.set("c", "<Up>", "<C-p>", { noremap = true })
