@@ -9,9 +9,10 @@
 -- \__|       \______/ \__|  \__|    \_/    \______|\__|     \__|
 -----------------------------------------------------------------
 -----------------------------------------------------------------
-
+--
+--
 vim.g.mapleader = " "
-vim.g.maplocalleaderg = " "
+vim.g.maplocalleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -26,4 +27,4 @@ require("cmd")
 require("cmd.auto")
 require("conf")
 require("keymap")
-require('misc.eris.eris')
+require("misc.eris.eris")

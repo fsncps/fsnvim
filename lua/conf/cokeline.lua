@@ -124,24 +124,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
    end
 })
 
--- 🔹 Switch between tabs without delete errors
-vim.keymap.set("n", "<Leader>tn", function()
-   local next_tab = vim.fn.tabpagenr() + 1
-   if next_tab > vim.fn.tabpagenr("$") then
-      next_tab = 1
-   end
-   vim.cmd("tabnext " .. next_tab)
-end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<Leader>tp", function()
-   local prev_tab = vim.fn.tabpagenr() - 1
-   if prev_tab < 1 then
-      prev_tab = vim.fn.tabpagenr("$")
-   end
-   vim.cmd("tabprevious " .. prev_tab)
-end, { noremap = true, silent = true })
-
-
--- 🔹 Switch between buffers
-vim.keymap.set("n", "<Leader>bn", ":bnext<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<Leader>bp", ":bprevious<CR>", { noremap = true, silent = true })
